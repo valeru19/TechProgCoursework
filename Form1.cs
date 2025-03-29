@@ -11,42 +11,42 @@ namespace Coursework
         private Editor _editor;
 
 
-        public Form1()  // Конструктор формы
+        public Form1()  // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ С„РѕСЂРјС‹
         {
             InitializeComponent();
-            _editor = new Editor(tabControl1);  // Экземпляр для управления вкладками
-            AddNewTab();    // Создаем новую вкладку по умолчанию
+            _editor = new Editor(tabControl1);  // Р­РєР·РµРјРїР»СЏСЂ РґР»СЏ СѓРїСЂР°РІР»РµРЅРёСЏ РІРєР»Р°РґРєР°РјРё
+            AddNewTab();    // РЎРѕР·РґР°РµРј РЅРѕРІСѓСЋ РІРєР»Р°РґРєСѓ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
             this.FormClosing += Form1_FormClosing;
         }
 
-        private void AddNewTab(string title = "No name")    // Метод для создания новой вкладки, содержит параметр - название док-та
+        private void AddNewTab(string title = "No name")    // РњРµС‚РѕРґ РґР»СЏ СЃРѕР·РґР°РЅРёСЏ РЅРѕРІРѕР№ РІРєР»Р°РґРєРё, СЃРѕРґРµСЂР¶РёС‚ РїР°СЂР°РјРµС‚СЂ - РЅР°Р·РІР°РЅРёРµ РґРѕРє-С‚Р°
         {
-            // Создаем объект документа, в котором будем хранить данные со вкладки
+            // РЎРѕР·РґР°РµРј РѕР±СЉРµРєС‚ РґРѕРєСѓРјРµРЅС‚Р°, РІ РєРѕС‚РѕСЂРѕРј Р±СѓРґРµРј С…СЂР°РЅРёС‚СЊ РґР°РЅРЅС‹Рµ СЃРѕ РІРєР»Р°РґРєРё
             var doc = new Document();
 
-            // Создать объект вкладки (TabPage), в которую помещаем заголовок вкладки
+            // РЎРѕР·РґР°С‚СЊ РѕР±СЉРµРєС‚ РІРєР»Р°РґРєРё (TabPage), РІ РєРѕС‚РѕСЂСѓСЋ РїРѕРјРµС‰Р°РµРј Р·Р°РіРѕР»РѕРІРѕРє РІРєР»Р°РґРєРё
             var tabPage = new TabPage();
 
-            // Связали документ с его вкладкой через его свойство Tag, чтобы можно было получать его обратно
+            // РЎРІСЏР·Р°Р»Рё РґРѕРєСѓРјРµРЅС‚ СЃ РµРіРѕ РІРєР»Р°РґРєРѕР№ С‡РµСЂРµР· РµРіРѕ СЃРІРѕР№СЃС‚РІРѕ Tag, С‡С‚РѕР±С‹ РјРѕР¶РЅРѕ Р±С‹Р»Рѕ РїРѕР»СѓС‡Р°С‚СЊ РµРіРѕ РѕР±СЂР°С‚РЅРѕ
             tabPage.Tag = doc;
 
-            // Создали полотно RichTextBox для редактирования текста
+            // РЎРѕР·РґР°Р»Рё РїРѕР»РѕС‚РЅРѕ RichTextBox РґР»СЏ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ С‚РµРєСЃС‚Р°
             var richTextBox = new RichTextBox
             {
-                Dock = DockStyle.Fill,  // Установили привязку Doc всему пространству вкладки
-                Font = new Font("Consolas", 12)                        // Задали шрифт и размер
+                Dock = DockStyle.Fill,  // РЈСЃС‚Р°РЅРѕРІРёР»Рё РїСЂРёРІСЏР·РєСѓ Doc РІСЃРµРјСѓ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІСѓ РІРєР»Р°РґРєРё
+                Font = new Font("Consolas", 12)                        // Р—Р°РґР°Р»Рё С€СЂРёС„С‚ Рё СЂР°Р·РјРµСЂ
             };
 
-            // Связали RichTextBox с документом, чтобы он мог получать и изменять его содержимое
+            // РЎРІСЏР·Р°Р»Рё RichTextBox СЃ РґРѕРєСѓРјРµРЅС‚РѕРј, С‡С‚РѕР±С‹ РѕРЅ РјРѕРі РїРѕР»СѓС‡Р°С‚СЊ Рё РёР·РјРµРЅСЏС‚СЊ РµРіРѕ СЃРѕРґРµСЂР¶РёРјРѕРµ
             doc.TextBox = richTextBox;
 
-            // Добавили RichTextBox в TabPage
+            // Р”РѕР±Р°РІРёР»Рё RichTextBox РІ TabPage
             tabPage.Controls.Add(richTextBox);
 
-            // Добавили TabPage в ControlTab
+            // Р”РѕР±Р°РІРёР»Рё TabPage РІ ControlTab
             tabControl1.TabPages.Add(tabPage);
 
-            // Переключили ControlTab в новую вкладку после ее создания
+            // РџРµСЂРµРєР»СЋС‡РёР»Рё ControlTab РІ РЅРѕРІСѓСЋ РІРєР»Р°РґРєСѓ РїРѕСЃР»Рµ РµРµ СЃРѕР·РґР°РЅРёСЏ
             tabControl1.SelectedTab = tabPage;
 
         }
@@ -54,42 +54,42 @@ namespace Coursework
 
 
 
-        /*Класс Document представляет собой модель текстового документа в приложении, предоставляя функциональность для открытия, редактирования и сохранения файлов*/
+        /*РљР»Р°СЃСЃ Document РїСЂРµРґСЃС‚Р°РІР»СЏРµС‚ СЃРѕР±РѕР№ РјРѕРґРµР»СЊ С‚РµРєСЃС‚РѕРІРѕРіРѕ РґРѕРєСѓРјРµРЅС‚Р° РІ РїСЂРёР»РѕР¶РµРЅРёРё, РїСЂРµРґРѕСЃС‚Р°РІР»СЏСЏ С„СѓРЅРєС†РёРѕРЅР°Р»СЊРЅРѕСЃС‚СЊ РґР»СЏ РѕС‚РєСЂС‹С‚РёСЏ, СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ Рё СЃРѕС…СЂР°РЅРµРЅРёСЏ С„Р°Р№Р»РѕРІ*/
         public class Document
         {
-            public string Name { get; set; }     // Полное имя файла (включая путь) Используется для отслеживания, куда сохранять или откуда открывать файл
-            public string ShortName => Path.GetFileName(Name);  // Автоматически резервируемое свойство. Возвращает короткое имя файла 
-            public bool HasName => !string.IsNullOrEmpty(Name);     // Проверка, задано ли имя файла. Возвращает true, если Name не пустое и не null
-            public bool Modified { get; set; }  // Флаг изменений. Используется для предупреждения пользователя о необходимости сохранения перед закрытием документа
+            public string Name { get; set; }     // РџРѕР»РЅРѕРµ РёРјСЏ С„Р°Р№Р»Р° (РІРєР»СЋС‡Р°СЏ РїСѓС‚СЊ) РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РґР»СЏ РѕС‚СЃР»РµР¶РёРІР°РЅРёСЏ, РєСѓРґР° СЃРѕС…СЂР°РЅСЏС‚СЊ РёР»Рё РѕС‚РєСѓРґР° РѕС‚РєСЂС‹РІР°С‚СЊ С„Р°Р№Р»
+            public string ShortName => Path.GetFileName(Name);  // РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРё СЂРµР·РµСЂРІРёСЂСѓРµРјРѕРµ СЃРІРѕР№СЃС‚РІРѕ. Р’РѕР·РІСЂР°С‰Р°РµС‚ РєРѕСЂРѕС‚РєРѕРµ РёРјСЏ С„Р°Р№Р»Р° 
+            public bool HasName => !string.IsNullOrEmpty(Name);     // РџСЂРѕРІРµСЂРєР°, Р·Р°РґР°РЅРѕ Р»Рё РёРјСЏ С„Р°Р№Р»Р°. Р’РѕР·РІСЂР°С‰Р°РµС‚ true, РµСЃР»Рё Name РЅРµ РїСѓСЃС‚РѕРµ Рё РЅРµ null
+            public bool Modified { get; set; }  // Р¤Р»Р°Рі РёР·РјРµРЅРµРЅРёР№. РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РґР»СЏ РїСЂРµРґСѓРїСЂРµР¶РґРµРЅРёСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ Рѕ РЅРµРѕР±С…РѕРґРёРјРѕСЃС‚Рё СЃРѕС…СЂР°РЅРµРЅРёСЏ РїРµСЂРµРґ Р·Р°РєСЂС‹С‚РёРµРј РґРѕРєСѓРјРµРЅС‚Р°
 
-            public RichTextBox TextBox { get; set; }    // Графический элемент управления (RichTextBox), предназначенный для отображения и редактирования текста документа
+            public RichTextBox TextBox { get; set; }    // Р“СЂР°С„РёС‡РµСЃРєРёР№ СЌР»РµРјРµРЅС‚ СѓРїСЂР°РІР»РµРЅРёСЏ (RichTextBox), РїСЂРµРґРЅР°Р·РЅР°С‡РµРЅРЅС‹Р№ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ Рё СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ С‚РµРєСЃС‚Р° РґРѕРєСѓРјРµРЅС‚Р°
 
             public Document()
-            /*Инициализирует экземпляр RichTextBox и устанавливает его свойство Dock для автоматического заполнения доступного пространства в родительском элементе интерфейса.
-            Это обеспечивает корректное отображение текстового поля в пользовательском интерфейсе*/
+            /*РРЅРёС†РёР°Р»РёР·РёСЂСѓРµС‚ СЌРєР·РµРјРїР»СЏСЂ RichTextBox Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ РµРіРѕ СЃРІРѕР№СЃС‚РІРѕ Dock РґР»СЏ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРіРѕ Р·Р°РїРѕР»РЅРµРЅРёСЏ РґРѕСЃС‚СѓРїРЅРѕРіРѕ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІР° РІ СЂРѕРґРёС‚РµР»СЊСЃРєРѕРј СЌР»РµРјРµРЅС‚Рµ РёРЅС‚РµСЂС„РµР№СЃР°.
+            Р­С‚Рѕ РѕР±РµСЃРїРµС‡РёРІР°РµС‚ РєРѕСЂСЂРµРєС‚РЅРѕРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ С‚РµРєСЃС‚РѕРІРѕРіРѕ РїРѕР»СЏ РІ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊСЃРєРѕРј РёРЅС‚РµСЂС„РµР№СЃРµ*/
             {
                 TextBox = new RichTextBox { Dock = DockStyle.Fill };
             }
 
             public void Open(string fileName)
             {
-                Name = fileName;    // Принимает путь к файлу и загружает его содержимое в TextBox
+                Name = fileName;    // РџСЂРёРЅРёРјР°РµС‚ РїСѓС‚СЊ Рє С„Р°Р№Р»Сѓ Рё Р·Р°РіСЂСѓР¶Р°РµС‚ РµРіРѕ СЃРѕРґРµСЂР¶РёРјРѕРµ РІ TextBox
                 TextBox.Text = File.ReadAllText(fileName);
-                Modified = false;   // Устанавливает флаг Modified в false, так как документ только что открыт и изменений нет
+                Modified = false;   // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ С„Р»Р°Рі Modified РІ false, С‚Р°Рє РєР°Рє РґРѕРєСѓРјРµРЅС‚ С‚РѕР»СЊРєРѕ С‡С‚Рѕ РѕС‚РєСЂС‹С‚ Рё РёР·РјРµРЅРµРЅРёР№ РЅРµС‚
             }
 
             public void Save()
             {
-                if (HasName)    // Сохраняет содержимое текстового поля в файл, если имя файла задано
+                if (HasName)    // РЎРѕС…СЂР°РЅСЏРµС‚ СЃРѕРґРµСЂР¶РёРјРѕРµ С‚РµРєСЃС‚РѕРІРѕРіРѕ РїРѕР»СЏ РІ С„Р°Р№Р», РµСЃР»Рё РёРјСЏ С„Р°Р№Р»Р° Р·Р°РґР°РЅРѕ
                 {
                     File.WriteAllText(Name, TextBox.Text);
-                    Modified = false;   // После сохранения устанавливает Modified в false
+                    Modified = false;   // РџРѕСЃР»Рµ СЃРѕС…СЂР°РЅРµРЅРёСЏ СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ Modified РІ false
                 }
             }
 
             public void SaveAs(string fileName)
             {
-                Name = fileName;    // Позволяет сохранить документ под новым именем
+                Name = fileName;    // РџРѕР·РІРѕР»СЏРµС‚ СЃРѕС…СЂР°РЅРёС‚СЊ РґРѕРєСѓРјРµРЅС‚ РїРѕРґ РЅРѕРІС‹Рј РёРјРµРЅРµРј
                 Save();
             }
         }
@@ -103,34 +103,34 @@ namespace Coursework
 
             public void Add(string fileName)
             {
-                if (_files.Contains(fileName))  // Если файл уже присутствует, удаляет его из списка (чтобы переместить его в начало)
+                if (_files.Contains(fileName))  // Р•СЃР»Рё С„Р°Р№Р» СѓР¶Рµ РїСЂРёСЃСѓС‚СЃС‚РІСѓРµС‚, СѓРґР°Р»СЏРµС‚ РµРіРѕ РёР· СЃРїРёСЃРєР° (С‡С‚РѕР±С‹ РїРµСЂРµРјРµСЃС‚РёС‚СЊ РµРіРѕ РІ РЅР°С‡Р°Р»Рѕ)
                 {
-                    _files.Remove(fileName);    // Вставляет новый файл в начало списка
+                    _files.Remove(fileName);    // Р’СЃС‚Р°РІР»СЏРµС‚ РЅРѕРІС‹Р№ С„Р°Р№Р» РІ РЅР°С‡Р°Р»Рѕ СЃРїРёСЃРєР°
                 }
-                _files.Insert(0, fileName);     // Вставляет новый файл в начало списка 
+                _files.Insert(0, fileName);     // Р’СЃС‚Р°РІР»СЏРµС‚ РЅРѕРІС‹Р№ С„Р°Р№Р» РІ РЅР°С‡Р°Р»Рѕ СЃРїРёСЃРєР° 
 
-                // Если количество файлов превышает MaxRecentFiles, удаляет последний файл из списка
+                // Р•СЃР»Рё РєРѕР»РёС‡РµСЃС‚РІРѕ С„Р°Р№Р»РѕРІ РїСЂРµРІС‹С€Р°РµС‚ MaxRecentFiles, СѓРґР°Р»СЏРµС‚ РїРѕСЃР»РµРґРЅРёР№ С„Р°Р№Р» РёР· СЃРїРёСЃРєР°
                 if (_files.Count > MaxRecentFiles)
                 {
                     _files.RemoveAt(MaxRecentFiles);
                 }
             }
 
-            public void SaveData()  // Сохраняет текущий список файлов в текстовый файл recent.txt
+            public void SaveData()  // РЎРѕС…СЂР°РЅСЏРµС‚ С‚РµРєСѓС‰РёР№ СЃРїРёСЃРѕРє С„Р°Р№Р»РѕРІ РІ С‚РµРєСЃС‚РѕРІС‹Р№ С„Р°Р№Р» recent.txt
             {
-                // Преобразуем список файлов в одну строку, разделяя элементы символом новой строки
+                // РџСЂРµРѕР±СЂР°Р·СѓРµРј СЃРїРёСЃРѕРє С„Р°Р№Р»РѕРІ РІ РѕРґРЅСѓ СЃС‚СЂРѕРєСѓ, СЂР°Р·РґРµР»СЏСЏ СЌР»РµРјРµРЅС‚С‹ СЃРёРјРІРѕР»РѕРј РЅРѕРІРѕР№ СЃС‚СЂРѕРєРё
                 string fileContent = string.Join(Environment.NewLine, _files);
 
-                File.WriteAllText("recent.txt", fileContent);    // Сохраняем строку в файл
+                File.WriteAllText("recent.txt", fileContent);    // РЎРѕС…СЂР°РЅСЏРµРј СЃС‚СЂРѕРєСѓ РІ С„Р°Р№Р»
             }
             public void LoadData()
             {
-                // Загружает список файлов из файла recent.txt, если файл существует 
+                // Р—Р°РіСЂСѓР¶Р°РµС‚ СЃРїРёСЃРѕРє С„Р°Р№Р»РѕРІ РёР· С„Р°Р№Р»Р° recent.txt, РµСЃР»Рё С„Р°Р№Р» СЃСѓС‰РµСЃС‚РІСѓРµС‚ 
                 if (File.Exists("recent.txt"))
-                    _files = File.ReadAllLines("recent.txt").ToList(); // Преобразует массив строк в список с помощью ToList()
+                    _files = File.ReadAllLines("recent.txt").ToList(); // РџСЂРµРѕР±СЂР°Р·СѓРµС‚ РјР°СЃСЃРёРІ СЃС‚СЂРѕРє РІ СЃРїРёСЃРѕРє СЃ РїРѕРјРѕС‰СЊСЋ ToList()
             }
 
-            public List<string> GetFiles() => _files;   // Возвращает текущий список файлов
+            public List<string> GetFiles() => _files;   // Р’РѕР·РІСЂР°С‰Р°РµС‚ С‚РµРєСѓС‰РёР№ СЃРїРёСЃРѕРє С„Р°Р№Р»РѕРІ
 
         }
 
@@ -139,17 +139,17 @@ namespace Coursework
 
         public class Editor
         {
-            // элемент управления, который содержит вкладки (TabPage) для каждого открытого документа
+            // СЌР»РµРјРµРЅС‚ СѓРїСЂР°РІР»РµРЅРёСЏ, РєРѕС‚РѕСЂС‹Р№ СЃРѕРґРµСЂР¶РёС‚ РІРєР»Р°РґРєРё (TabPage) РґР»СЏ РєР°Р¶РґРѕРіРѕ РѕС‚РєСЂС‹С‚РѕРіРѕ РґРѕРєСѓРјРµРЅС‚Р°
             private TabControl _tabControl;
 
-            // экземпляр класса RecentList, используемый для управления списком недавно открытых файлов
+            // СЌРєР·РµРјРїР»СЏСЂ РєР»Р°СЃСЃР° RecentList, РёСЃРїРѕР»СЊР·СѓРµРјС‹Р№ РґР»СЏ СѓРїСЂР°РІР»РµРЅРёСЏ СЃРїРёСЃРєРѕРј РЅРµРґР°РІРЅРѕ РѕС‚РєСЂС‹С‚С‹С… С„Р°Р№Р»РѕРІ
             private RecentList _recentList = new RecentList();
 
             public RecentList RecentList => _recentList;
 
 
-            /*конструктор принимает TabControl, который связывается с интерфейсом редактора. 
-             При инициализации загружается список последних открытых файлов через LoadData*/
+            /*РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїСЂРёРЅРёРјР°РµС‚ TabControl, РєРѕС‚РѕСЂС‹Р№ СЃРІСЏР·С‹РІР°РµС‚СЃСЏ СЃ РёРЅС‚РµСЂС„РµР№СЃРѕРј СЂРµРґР°РєС‚РѕСЂР°. 
+             РџСЂРё РёРЅРёС†РёР°Р»РёР·Р°С†РёРё Р·Р°РіСЂСѓР¶Р°РµС‚СЃСЏ СЃРїРёСЃРѕРє РїРѕСЃР»РµРґРЅРёС… РѕС‚РєСЂС‹С‚С‹С… С„Р°Р№Р»РѕРІ С‡РµСЂРµР· LoadData*/
             public Editor(TabControl tabControl)
             {
                 _tabControl = tabControl;
@@ -159,9 +159,9 @@ namespace Coursework
             public void NewDoc()
             {
                 var doc = new Document();
-                var tabPage = new TabPage("No name");    // Создаёт новый документ без имени
+                var tabPage = new TabPage("No name");    // РЎРѕР·РґР°С‘С‚ РЅРѕРІС‹Р№ РґРѕРєСѓРјРµРЅС‚ Р±РµР· РёРјРµРЅРё
                 tabPage.Tag = doc;
-                tabPage.Controls.Add(doc.TextBox);  // Добавляет его на новую вкладку (TabPage) с текстовым полем TextBox
+                tabPage.Controls.Add(doc.TextBox);  // Р”РѕР±Р°РІР»СЏРµС‚ РµРіРѕ РЅР° РЅРѕРІСѓСЋ РІРєР»Р°РґРєСѓ (TabPage) СЃ С‚РµРєСЃС‚РѕРІС‹Рј РїРѕР»РµРј TextBox
                 _tabControl.TabPages.Add(tabPage);
                 _tabControl.SelectedTab = tabPage;
             }
@@ -176,7 +176,7 @@ namespace Coursework
 
                 if (DocOpened(fileName))
                 {
-                    return; // Если файл уже открыт, просто переключаемся на вкладку
+                    return; // Р•СЃР»Рё С„Р°Р№Р» СѓР¶Рµ РѕС‚РєСЂС‹С‚, РїСЂРѕСЃС‚Рѕ РїРµСЂРµРєР»СЋС‡Р°РµРјСЃСЏ РЅР° РІРєР»Р°РґРєСѓ
                 }
 
                 var doc = new Document();
@@ -188,18 +188,18 @@ namespace Coursework
                 _tabControl.TabPages.Add(tabPage);
                 _tabControl.SelectedTab = tabPage;
 
-                _recentList.Add(fileName); // Добавляем в список последних файлов
-                _recentList.SaveData(); // Сохраняем его в файл
+                _recentList.Add(fileName); // Р”РѕР±Р°РІР»СЏРµРј РІ СЃРїРёСЃРѕРє РїРѕСЃР»РµРґРЅРёС… С„Р°Р№Р»РѕРІ
+                _recentList.SaveData(); // РЎРѕС…СЂР°РЅСЏРµРј РµРіРѕ РІ С„Р°Р№Р»
             }
 
 
             public void SaveDoc()
             {
                 var doc = GetActiveDocument();
-                if (doc != null)    // Сохраняет активный документ, если он существует
+                if (doc != null)    // РЎРѕС…СЂР°РЅСЏРµС‚ Р°РєС‚РёРІРЅС‹Р№ РґРѕРєСѓРјРµРЅС‚, РµСЃР»Рё РѕРЅ СЃСѓС‰РµСЃС‚РІСѓРµС‚
                 {
 
-                    //Если имя файла не задано, вызывает метод SaveDocAs() для выбора пути
+                    //Р•СЃР»Рё РёРјСЏ С„Р°Р№Р»Р° РЅРµ Р·Р°РґР°РЅРѕ, РІС‹Р·С‹РІР°РµС‚ РјРµС‚РѕРґ SaveDocAs() РґР»СЏ РІС‹Р±РѕСЂР° РїСѓС‚Рё
                     if (doc.HasName)
                     {
                         doc.Save();
@@ -217,10 +217,10 @@ namespace Coursework
                 var doc = GetActiveDocument();
                 if (doc != null)
                 {
-                    var saveFileDialog = new SaveFileDialog();  // Открывает диалоговое окно для выбора пути сохранения
+                    var saveFileDialog = new SaveFileDialog();  // РћС‚РєСЂС‹РІР°РµС‚ РґРёР°Р»РѕРіРѕРІРѕРµ РѕРєРЅРѕ РґР»СЏ РІС‹Р±РѕСЂР° РїСѓС‚Рё СЃРѕС…СЂР°РЅРµРЅРёСЏ
                     if (saveFileDialog.ShowDialog() == DialogResult.OK)
                     {
-                        // Обновляет заголовок вкладки и сохраняет путь к файлу в списке последних файлов
+                        // РћР±РЅРѕРІР»СЏРµС‚ Р·Р°РіРѕР»РѕРІРѕРє РІРєР»Р°РґРєРё Рё СЃРѕС…СЂР°РЅСЏРµС‚ РїСѓС‚СЊ Рє С„Р°Р№Р»Сѓ РІ СЃРїРёСЃРєРµ РїРѕСЃР»РµРґРЅРёС… С„Р°Р№Р»РѕРІ
                         doc.SaveAs(saveFileDialog.FileName);
                         _tabControl.SelectedTab.Text = doc.ShortName;
                         _recentList.Add(doc.Name);
@@ -233,7 +233,7 @@ namespace Coursework
                 var doc = GetActiveDocument();
                 if (doc != null)
                 {
-                    // Если документ был изменён или не имеет имени (ещё не сохранён), предлагаем сохранить
+                    // Р•СЃР»Рё РґРѕРєСѓРјРµРЅС‚ Р±С‹Р» РёР·РјРµРЅС‘РЅ РёР»Рё РЅРµ РёРјРµРµС‚ РёРјРµРЅРё (РµС‰С‘ РЅРµ СЃРѕС…СЂР°РЅС‘РЅ), РїСЂРµРґР»Р°РіР°РµРј СЃРѕС…СЂР°РЅРёС‚СЊ
                     if (doc.Modified || !doc.HasName)
                     {
                         var result = MessageBox.Show("Save changes?", "Warning", MessageBoxButtons.YesNoCancel);
@@ -241,7 +241,7 @@ namespace Coursework
                         {
                             if (!doc.HasName)
                             {
-                                SaveDocAs();  // Если файл не имеет имени, вызываем "Save As"
+                                SaveDocAs();  // Р•СЃР»Рё С„Р°Р№Р» РЅРµ РёРјРµРµС‚ РёРјРµРЅРё, РІС‹Р·С‹РІР°РµРј "Save As"
                             }
                             else
                             {
@@ -250,15 +250,15 @@ namespace Coursework
                         }
                         else if (result == DialogResult.Cancel)
                         {
-                            return; // Отмена закрытия документа
+                            return; // РћС‚РјРµРЅР° Р·Р°РєСЂС‹С‚РёСЏ РґРѕРєСѓРјРµРЅС‚Р°
                         }
                     }
-                    _tabControl.TabPages.Remove(_tabControl.SelectedTab); // Удаляем вкладку
+                    _tabControl.TabPages.Remove(_tabControl.SelectedTab); // РЈРґР°Р»СЏРµРј РІРєР»Р°РґРєСѓ
                 }
             }
 
 
-            private Document GetActiveDocument()    // Возвращает активный документ через привязку вкладки и документа через свойство Tag.
+            public Document GetActiveDocument()    // Р’РѕР·РІСЂР°С‰Р°РµС‚ Р°РєС‚РёРІРЅС‹Р№ РґРѕРєСѓРјРµРЅС‚ С‡РµСЂРµР· РїСЂРёРІСЏР·РєСѓ РІРєР»Р°РґРєРё Рё РґРѕРєСѓРјРµРЅС‚Р° С‡РµСЂРµР· СЃРІРѕР№СЃС‚РІРѕ Tag.
             {
                 if (_tabControl.SelectedTab != null && _tabControl.SelectedTab.Tag is Document doc)
                     return doc;
@@ -267,15 +267,15 @@ namespace Coursework
 
             public bool DocOpened(string fileName)
             {
-                // Возвращает true, если вкладка с таким именем уже существует
+                // Р’РѕР·РІСЂР°С‰Р°РµС‚ true, РµСЃР»Рё РІРєР»Р°РґРєР° СЃ С‚Р°РєРёРј РёРјРµРЅРµРј СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚
                 return _tabControl.TabPages.Cast<TabPage>().Any(tab => tab.Text == Path.GetFileName(fileName));
             }
             public void AddTabPage(Document doc, TabPage tabPage)
             {
-                tabPage.Tag = doc;   // Связываем документ с вкладкой через свойство Tag
-                tabPage.Controls.Add(doc.TextBox);  // Добавляем текстовое поле в вкладку
-                _tabControl.TabPages.Add(tabPage);  // Добавляем вкладку в TabControl
-                _tabControl.SelectedTab = tabPage;  // Переключаемся на новую вкладку
+                tabPage.Tag = doc;   // РЎРІСЏР·С‹РІР°РµРј РґРѕРєСѓРјРµРЅС‚ СЃ РІРєР»Р°РґРєРѕР№ С‡РµСЂРµР· СЃРІРѕР№СЃС‚РІРѕ Tag
+                tabPage.Controls.Add(doc.TextBox);  // Р”РѕР±Р°РІР»СЏРµРј С‚РµРєСЃС‚РѕРІРѕРµ РїРѕР»Рµ РІ РІРєР»Р°РґРєСѓ
+                _tabControl.TabPages.Add(tabPage);  // Р”РѕР±Р°РІР»СЏРµРј РІРєР»Р°РґРєСѓ РІ TabControl
+                _tabControl.SelectedTab = tabPage;  // РџРµСЂРµРєР»СЋС‡Р°РµРјСЃСЏ РЅР° РЅРѕРІСѓСЋ РІРєР»Р°РґРєСѓ
             }
 
         }
@@ -326,7 +326,7 @@ namespace Coursework
                             }
                             else
                             {
-                                e.Cancel = true; // Отмена закрытия, если пользователь отказался от сохранения
+                                e.Cancel = true; // РћС‚РјРµРЅР° Р·Р°РєСЂС‹С‚РёСЏ, РµСЃР»Рё РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ РѕС‚РєР°Р·Р°Р»СЃСЏ РѕС‚ СЃРѕС…СЂР°РЅРµРЅРёСЏ
                                 return;
                             }
                         }
@@ -337,7 +337,7 @@ namespace Coursework
                     }
                     else if (result == DialogResult.Cancel)
                     {
-                        e.Cancel = true; // Отмена закрытия
+                        e.Cancel = true; // РћС‚РјРµРЅР° Р·Р°РєСЂС‹С‚РёСЏ
                         return;
                     }
                 }
@@ -359,9 +359,9 @@ namespace Coursework
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     string fileName = openFileDialog.FileName;
-                    Console.WriteLine("Selected file: " + fileName);  // Выводим имя выбранного файла в консоль
+                    Console.WriteLine("Selected file: " + fileName);  // Р’С‹РІРѕРґРёРј РёРјСЏ РІС‹Р±СЂР°РЅРЅРѕРіРѕ С„Р°Р№Р»Р° РІ РєРѕРЅСЃРѕР»СЊ
 
-                    _editor.OpenDoc(fileName);  // Вызываем метод для открытия файла
+                    _editor.OpenDoc(fileName);  // Р’С‹Р·С‹РІР°РµРј РјРµС‚РѕРґ РґР»СЏ РѕС‚РєСЂС‹С‚РёСЏ С„Р°Р№Р»Р°
                 }
             }
         }
@@ -391,7 +391,7 @@ namespace Coursework
                 if (File.Exists(file))
                 {
                     var menuItem = new ToolStripMenuItem(file);
-                    menuItem.Click += OpenRecentFile; // Теперь используется исправленный метод
+                    menuItem.Click += OpenRecentFile; // РўРµРїРµСЂСЊ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РёСЃРїСЂР°РІР»РµРЅРЅС‹Р№ РјРµС‚РѕРґ
                     recentToolStripMenuItem.DropDownItems.Add(menuItem);
                 }
             }
@@ -411,7 +411,7 @@ namespace Coursework
 
                     if (result == DialogResult.Yes)
                     {
-                        if (!doc.HasName) // Если у документа нет имени, вызываем "Save As"
+                        if (!doc.HasName) // Р•СЃР»Рё Сѓ РґРѕРєСѓРјРµРЅС‚Р° РЅРµС‚ РёРјРµРЅРё, РІС‹Р·С‹РІР°РµРј "Save As"
                         {
                             var saveFileDialog = new SaveFileDialog();
                             if (saveFileDialog.ShowDialog() == DialogResult.OK)
@@ -422,7 +422,7 @@ namespace Coursework
                             }
                             else
                             {
-                                return; // Если пользователь отказался от "Save As", не выходим
+                                return; // Р•СЃР»Рё РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ РѕС‚РєР°Р·Р°Р»СЃСЏ РѕС‚ "Save As", РЅРµ РІС‹С…РѕРґРёРј
                             }
                         }
                         else
@@ -432,12 +432,50 @@ namespace Coursework
                     }
                     else if (result == DialogResult.Cancel)
                     {
-                        return; // Если пользователь нажал "Cancel", не выходим
+                        return; // Р•СЃР»Рё РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ РЅР°Р¶Р°Р» "Cancel", РЅРµ РІС‹С…РѕРґРёРј
                     }
                 }
             }
 
             Application.Exit();
+        }
+
+        private void backgroundSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // РџРѕР»СѓС‡Р°РµРј С‚РµРєСѓС‰РёР№ РґРѕРєСѓРјРµРЅС‚ РёР· Р°РєС‚РёРІРЅРѕР№ РІРєР»Р°РґРєРё
+            var doc = _editor.GetActiveDocument();
+            if (doc != null)
+            {
+                if (colorDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    // РџСЂРёРјРµРЅСЏРµРј С†РІРµС‚ С‚РѕР»СЊРєРѕ Рє RichTextBox С‚РµРєСѓС‰РµР№ РІРєР»Р°РґРєРё
+                    doc.TextBox.BackColor = colorDialog1.Color;
+                }
+            }
+            else
+            {
+                MessageBox.Show("РќРµС‚ Р°РєС‚РёРІРЅРѕР№ РІРєР»Р°РґРєРё РґР»СЏ РёР·РјРµРЅРµРЅРёСЏ С„РѕРЅР°", "РћС€РёР±РєР°",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void fontSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // РџРѕР»СѓС‡Р°РµРј С‚РµРєСѓС‰РёР№ РґРѕРєСѓРјРµРЅС‚ РёР· Р°РєС‚РёРІРЅРѕР№ РІРєР»Р°РґРєРё
+            var doc = _editor.GetActiveDocument();
+            if (doc != null)
+            {
+                if (fontDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    // РџСЂРёРјРµРЅСЏРµРј С€СЂРёС„С‚ С‚РѕР»СЊРєРѕ Рє RichTextBox С‚РµРєСѓС‰РµР№ РІРєР»Р°РґРєРё
+                    doc.TextBox.Font = fontDialog1.Font;
+                }
+            }
+            else
+            {
+                MessageBox.Show("РќРµС‚ Р°РєС‚РёРІРЅРѕР№ РІРєР»Р°РґРєРё РґР»СЏ РёР·РјРµРЅРµРЅРёСЏ С€СЂРёС„С‚Р°", "РћС€РёР±РєР°",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
     }
 }
