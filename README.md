@@ -85,4 +85,5 @@ Editor --> Document
 Editor --> RecentList
 Document --> RichTextBox
 @enduml
+![Снимок экрана 2025-04-02 200842](https://github.com/user-attachments/assets/1ba0b33e-8b5f-4bd4-be83-04cc26f4a401)
 
