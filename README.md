@@ -44,67 +44,45 @@ _recentList сохраняет и загружает историю открыт
 Каждая вкладка отображает текстовое поле (RichTextBox) документа.
 ![image](https://github.com/user-attachments/assets/6ee4fc57-5cac-46af-8210-603862a59b0c)
 
-classDiagram
-    class Form1 {
-        -Editor _editor
-        +Form1()
-        +AddNewTab(title: string)
-        -OpenRecentFile(sender, e)
-        -Form1_FormClosing(sender, e)
-        -newToolStripMenuItem_Click()
-        -openToolStripMenuItem_Click()
-        -saveToolStripMenuItem_Click()
-        -saveAsToolStripMenuItem_Click()
-        -closeToolStripMenuItem_Click()
-        -recentToolStripMenuItem_Click()
-        -exitToolStripMenuItem_Click()
-        -backgroundSettingsToolStripMenuItem_Click()
-        -fontSettingsToolStripMenuItem_Click()
-    }
 
-    class Editor {
-        -TabControl _tabControl
-        -RecentList _recentList
-        +RecentList RecentList
-        +Editor(tabControl)
-        +NewDoc()
-        +OpenDoc(fileName)
-        +SaveDoc()
-        +SaveDocAs()
-        +CloseActiveDoc()
-        -GetActiveDocument() Document
-        -DocOpened(fileName) bool
-        +AddTabPage(doc, tabPage)
-    }
+@startuml
+class Form1 {
+  - Editor _editor
+  + Form1()
+  + AddNewTab()
+  + OpenRecentFile()
+  + Form1_FormClosing()
+  + обработчики событий меню...
+}
 
-    class Document {
-        +string Name
-        +string ShortName
-        +bool HasName
-        +bool Modified
-        +RichTextBox TextBox
-        +Document()
-        +Open(fileName)
-        +Save()
-        +SaveAs(fileName)
-    }
+class Editor {
+  - TabControl _tabControl
+  - RecentList _recentList
+  + NewDoc()
+  + OpenDoc()
+  + SaveDoc()
+  + CloseActiveDoc()
+}
 
-    class RecentList {
-        -const MaxRecentFiles
-        -List~string~ _files
-        +Add(fileName)
-        +SaveData()
-        +LoadData()
-        +GetFiles() List~string~
-    }
+class Document {
+  + string Name
+  + bool Modified
+  + RichTextBox TextBox
+  + Open()
+  + Save()
+  + SaveAs()
+}
 
-    class RichTextBox {
-        +Dock DockStyle
-        +Font Font
-        +Text string
-    }
+class RecentList {
+  - List<string> _files
+  + Add()
+  + SaveData()
+  + LoadData()
+}
 
-    Form1 --> Editor : содержит
-    Editor --> Document : управляет
-    Editor --> RecentList : использует
-    Document --> RichTextBox : содержит
+Form1 --> Editor
+Editor --> Document
+Editor --> RecentList
+Document --> RichTextBox
+@enduml
+
